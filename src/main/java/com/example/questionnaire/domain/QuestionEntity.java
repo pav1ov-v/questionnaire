@@ -11,8 +11,12 @@ public class QuestionEntity {
 
     private String questionContent;
 
+    @ManyToOne
+    @JoinColumn(name = "questionnaire_id")
+    private QuestionnaireEntity questionnaire;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
-    Set<AnswerDescriptionEntity> descriptions;
+    Set<AnswerDescriptionEntity> answerDescriptions;
 
     @Enumerated(EnumType.STRING)
     private TypeOfAnswer typeOfAnswer;
@@ -44,12 +48,20 @@ public class QuestionEntity {
         this.typeOfAnswer = typeOfAnswer;
     }
 
-    public Set<AnswerDescriptionEntity> getDescriptions() {
-        return descriptions;
+    public Set<AnswerDescriptionEntity> getAnswerDescriptions() {
+        return answerDescriptions;
     }
 
-    public void setDescriptions(Set<AnswerDescriptionEntity> description) {
-        this.descriptions = description;
+    public void setAnswerDescriptions(Set<AnswerDescriptionEntity> answerDescriptions) {
+        this.answerDescriptions = answerDescriptions;
+    }
+
+    public QuestionnaireEntity getQuestionnaire() {
+        return questionnaire;
+    }
+
+    public void setQuestionnaire(QuestionnaireEntity questionnaire) {
+        this.questionnaire = questionnaire;
     }
 
     @Override

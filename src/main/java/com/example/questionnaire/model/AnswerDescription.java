@@ -3,22 +3,22 @@ package com.example.questionnaire.model;
 import com.example.questionnaire.domain.AnswerDescriptionEntity;
 
 public class AnswerDescription {
-    private String description;
+    private String answerDescription;
 
     public static AnswerDescription toModel(AnswerDescriptionEntity entity){
         AnswerDescription model = new AnswerDescription();
-        model.setDescription(entity.getDescription());
+        model.setAnswerDescription(entity.getAnswerDescription());
         return model;
     }
 
     public AnswerDescription() {
     }
 
-    public String getDescription() {
-        return description;
+    public String getAnswerDescription() {
+        return answerDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAnswerDescription(String answerDescription) {
+        this.answerDescription = answerDescription;
     }
 }

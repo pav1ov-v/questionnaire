@@ -17,12 +17,12 @@ public class AnswerDescriptionController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> addDescription(
-            @RequestBody AnswerDescriptionEntity description,
+    public ResponseEntity<String> addAnswerDescription(
+            @RequestBody AnswerDescriptionEntity answerDescription,
             @RequestParam Long questionId
     ) {
         try {
-            answerDescriptionService.createDescription(description, questionId);
+            answerDescriptionService.createAnswerDescription(answerDescription, questionId);
             return ResponseEntity.ok("Ответ добавлен");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Произошла ошибка");

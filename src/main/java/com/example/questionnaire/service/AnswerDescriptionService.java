@@ -22,13 +22,12 @@ public class AnswerDescriptionService {
         this.questionRepository = questionRepository;
     }
 
-    public AnswerDescription createDescription(AnswerDescriptionEntity description, Long questionId) {
-        QuestionEntity question;
+    public void createAnswerDescription(AnswerDescriptionEntity answerDescription, Long questionId) {
         if (questionRepository.findById(questionId).isPresent()) {
-            question = questionRepository.findById(questionId).get();
-            description.setQuestion(question);
+            QuestionEntity question = questionRepository.findById(questionId).get();
+            answerDescription.setQuestion(question);
+            answerDescriptionRepository.save(answerDescription);
         }
-        return AnswerDescription.toModel(answerDescriptionRepository.save(description));
 
     }
 }

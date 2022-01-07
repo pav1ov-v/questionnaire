@@ -8,7 +8,7 @@ public class AnswerDescriptionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String description;
+    private String answerDescription;
 
     @ManyToOne
     @JoinColumn(name = "question_id")
@@ -17,12 +17,12 @@ public class AnswerDescriptionEntity {
     public AnswerDescriptionEntity() {
     }
 
-    public String getDescription() {
-        return description;
+    public String getAnswerDescription() {
+        return answerDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAnswerDescription(String answerDescription) {
+        this.answerDescription = answerDescription;
     }
 
     public QuestionEntity getQuestion() {

@@ -10,21 +10,21 @@ import java.util.Set;
 public class Question {
     private Long id;
     private String questionContent;
-    private List<AnswerDescription> descriptions;
+    private List<AnswerDescription> answerDescriptions;
 
     public static Question toModel(QuestionEntity entity){
         Question model = new Question();
         model.setId(entity.getId());
         model.setQuestionContent(entity.getQuestionContent());
 
-        Set<AnswerDescriptionEntity> descriptionEntitySet = entity.getDescriptions();
-        List<AnswerDescription> descriptionList = new ArrayList<>();
+        Set<AnswerDescriptionEntity> answerDescriptionEntities = entity.getAnswerDescriptions();
+        List<AnswerDescription> answerDescriptions = new ArrayList<>();
 
-        for(AnswerDescriptionEntity descriptionEntity : descriptionEntitySet){
-            descriptionList.add(AnswerDescription.toModel(descriptionEntity));
+        for(AnswerDescriptionEntity answerDescriptionEntity : answerDescriptionEntities){
+            answerDescriptions.add(AnswerDescription.toModel(answerDescriptionEntity));
         }
 
-        model.setDescriptions(descriptionList);
+        model.setAnswerDescriptions(answerDescriptions);
 
         return model;
     }
@@ -48,11 +48,11 @@ public class Question {
         this.questionContent = questionContent;
     }
 
-    public List<AnswerDescription> getDescriptions() {
-        return descriptions;
+    public List<AnswerDescription> getAnswerDescriptions() {
+        return answerDescriptions;
     }
 
-    public void setDescriptions(List<AnswerDescription> descriptions) {
-        this.descriptions = descriptions;
+    public void setAnswerDescriptions(List<AnswerDescription> answerDescriptions) {
+        this.answerDescriptions = answerDescriptions;
     }
 }

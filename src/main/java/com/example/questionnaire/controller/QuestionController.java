@@ -31,9 +31,22 @@ public class QuestionController {
     }
 
     @PostMapping("/addQWRA")
-    public ResponseEntity<String> addQuestionWithRadioAnswer(@RequestBody QuestionEntity question) {
+    public ResponseEntity<String> addQuestionWithRadioAnswer(
+            @RequestBody QuestionEntity question,
+            @RequestParam Long questionnaireId
+    ) {
         try {
-            questionService.createQuestionWithRadioAnswer(question);
+            questionService.createQuestionWithRadioAnswer(question, questionnaireId);
+            return ResponseEntity.ok("Вопрос добавлен");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Произошла ошибка");
+        }
+    }
+
+    @PostMapping("/addQWCA")
+    public ResponseEntity<String> addQuestionWithCheckboxAnswer(@RequestBody QuestionEntity question) {
+        try {
+            questionService.createQuestionWithCheckboxAnswer(question);
             return ResponseEntity.ok("Вопрос добавлен");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Произошла ошибка");
@@ -41,12 +54,8 @@ public class QuestionController {
     }
 
     @GetMapping("/getQuestionById")
-    public Question getQuestionById(Long id) {
-        QuestionEntity question = new QuestionEntity();
-        if (questionRepository.findById(id).isPresent()) {
-            question = questionRepository.findById(id).get();
-        }
-        return Question.toModel(question);
+    public Question getQuestionById(@RequestParam Long id) {
+        return questionService.getQuestionById(id);
     }
 
     @GetMapping()
