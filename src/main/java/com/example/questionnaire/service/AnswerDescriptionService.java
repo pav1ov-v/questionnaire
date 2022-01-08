@@ -4,9 +4,9 @@ import com.example.questionnaire.dao.QuestionRepository;
 import com.example.questionnaire.dao.AnswerDescriptionRepository;
 import com.example.questionnaire.domain.QuestionEntity;
 import com.example.questionnaire.domain.AnswerDescriptionEntity;
-import com.example.questionnaire.model.AnswerDescription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AnswerDescriptionService {
@@ -29,5 +29,10 @@ public class AnswerDescriptionService {
             answerDescriptionRepository.save(answerDescription);
         }
 
+    }
+
+    @Transactional
+    public void deleteAllAnswerDescriptionByQuestionId(Long id) {
+        answerDescriptionRepository.deleteAllByQuestionId(id);
     }
 }

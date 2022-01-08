@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AnswerDescriptionRepository extends CrudRepository<AnswerDescriptionEntity, Long> {
+    void deleteAllByQuestionId(Long questionId);
 }
