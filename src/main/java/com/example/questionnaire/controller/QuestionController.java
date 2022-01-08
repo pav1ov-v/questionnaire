@@ -1,7 +1,8 @@
 package com.example.questionnaire.controller;
 
 import com.example.questionnaire.domain.QuestionEntity;
-import com.example.questionnaire.model.Question;
+import com.example.questionnaire.exception.QuestionNotExistException;
+import com.example.questionnaire.exception.QuestionnaireNotExistException;
 import com.example.questionnaire.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,14 +26,22 @@ public class QuestionController {
         try {
             questionService.createQuestion(question, questionnaireId);
             return ResponseEntity.ok("Вопрос добавлен");
+        } catch (QuestionnaireNotExistException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Произошла ошибка");
         }
     }
 
     @GetMapping("/getBy")
-    public Question getQuestionById(@RequestParam Long id) {
-        return questionService.getQuestionById(id);
+    public ResponseEntity<?> getQuestionById(@RequestParam Long id) {
+        try {
+            return ResponseEntity.ok(questionService.getQuestionById(id));
+        } catch (QuestionNotExistException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Произошла ошибка");
+        }
     }
 
     @PostMapping("/updateBy")
@@ -42,7 +51,9 @@ public class QuestionController {
     ) {
         try {
             questionService.updateQuestionById(question, id);
-            return ResponseEntity.ok("Вопрос обновлен");
+            return ResponseEntity.ok("Вопрос обновлен, все приложенные к нему ответы удалены");
+        } catch (QuestionNotExistException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Произошла ошибка");
         }
@@ -53,6 +64,8 @@ public class QuestionController {
         try {
             questionService.deleteQuestionById(id);
             return ResponseEntity.ok("Вопрос удален");
+        } catch (QuestionNotExistException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Произошла ошибка");
         }
