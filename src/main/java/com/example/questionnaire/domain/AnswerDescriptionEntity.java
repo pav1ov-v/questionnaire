@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class AnswerDescriptionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String answerDescription;
 

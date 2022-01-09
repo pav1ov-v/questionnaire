@@ -7,7 +7,7 @@ import java.util.Set;
 public class QuestionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String questionContent;
 
@@ -16,7 +16,7 @@ public class QuestionEntity {
     private QuestionnaireEntity questionnaire;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
-    Set<AnswerDescriptionEntity> answerDescriptions;
+    private Set<AnswerDescriptionEntity> answerDescriptions;
 
     @Enumerated(EnumType.STRING)
     private TypeOfAnswer typeOfAnswer;
@@ -62,14 +62,5 @@ public class QuestionEntity {
 
     public void setQuestionnaire(QuestionnaireEntity questionnaire) {
         this.questionnaire = questionnaire;
-    }
-
-    @Override
-    public String toString() {
-        return "Question{" +
-                "id=" + id +
-                ", questionContent='" + questionContent + '\'' +
-                ", typeOfAnswer=" + typeOfAnswer +
-                '}';
     }
 }

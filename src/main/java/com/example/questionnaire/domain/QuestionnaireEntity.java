@@ -13,9 +13,12 @@ public class QuestionnaireEntity {
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "questionnaire")
-    Set<QuestionEntity> questions;
+    private Set<QuestionEntity> questions;
 
-    public QuestionnaireEntity(){
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "questionnaire")
+    private takenQuestionnaireEntity takenQuestionnaire;
+
+    public QuestionnaireEntity() {
     }
 
     public Long getId() {

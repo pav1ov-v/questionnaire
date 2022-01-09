@@ -1,7 +1,6 @@
 package com.example.questionnaire.controller;
 
 import com.example.questionnaire.domain.UserEntity;
-import com.example.questionnaire.domain.UserRole;
 import com.example.questionnaire.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

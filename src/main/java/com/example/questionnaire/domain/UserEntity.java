@@ -10,6 +10,9 @@ public class UserEntity {
 
     private String username;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    private takenQuestionnaireEntity takenQuestionnaire;
+
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
