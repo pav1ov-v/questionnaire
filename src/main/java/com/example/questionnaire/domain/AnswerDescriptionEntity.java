@@ -25,6 +25,14 @@ public class AnswerDescriptionEntity {
         this.answerDescription = answerDescription;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public QuestionEntity getQuestion() {
         return question;
     }

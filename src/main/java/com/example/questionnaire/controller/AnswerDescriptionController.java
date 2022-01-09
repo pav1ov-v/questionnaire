@@ -17,7 +17,7 @@ public class AnswerDescriptionController {
         this.answerDescriptionService = answerDescriptionService;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/addTo")
     public ResponseEntity<String> addAnswerDescription(
             @RequestBody AnswerDescriptionEntity answerDescription,
             @RequestParam Long questionId

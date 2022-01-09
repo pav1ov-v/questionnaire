@@ -25,7 +25,7 @@ public class QuestionController {
     ) {
         try {
             questionService.createQuestion(question, questionnaireId);
-            return ResponseEntity.ok("Вопрос добавлен");
+            return ResponseEntity.ok(String.format("Вопрос добавлен под id = %d", question.getId()));
         } catch (QuestionnaireNotExistException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
