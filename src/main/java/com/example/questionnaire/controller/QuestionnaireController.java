@@ -1,7 +1,7 @@
 package com.example.questionnaire.controller;
 
 import com.example.questionnaire.domain.QuestionnaireEntity;
-import com.example.questionnaire.model.Questionnaire;
+import com.example.questionnaire.exception.QuestionnaireNotExistException;
 import com.example.questionnaire.service.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +21,56 @@ public class QuestionnaireController {
     public ResponseEntity<String> addQuestionnaire(@RequestBody QuestionnaireEntity questionnaire) {
         try {
             questionnaireService.createQuestionnaire(questionnaire);
-            return ResponseEntity.ok("Опрос добавлен");
+            return ResponseEntity.ok(String.format("Опрос добавлен под id = %d", questionnaire.getId()));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Произошла ошибка");
         }
     }
 
-    @GetMapping("/getQuestionnaireById")
-    public Questionnaire getQuestionnaireById(@RequestParam Long id) {
-        return questionnaireService.getQuestionnaireById(id);
+    @GetMapping("/getBy")
+    public ResponseEntity<?> getQuestionnaireById(@RequestParam Long id) {
+        try {
+            return ResponseEntity.ok(questionnaireService.getQuestionnaireById(id));
+        } catch (QuestionnaireNotExistException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Произошла ошибка");
+        }
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<?> getAllQuestionnairesInfo() {
+        try {
+            return ResponseEntity.ok(questionnaireService.getAllQuestionnairesInfo());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Произошла ошибка");
+        }
+    }
+
+    @PostMapping("/updateBy")
+    public ResponseEntity<String> updateQuestionnaireById(
+            @RequestBody QuestionnaireEntity questionnaire,
+            @RequestParam Long id
+    ) {
+        try {
+            questionnaireService.updateQuestionnaireById(questionnaire, id);
+            return ResponseEntity.ok("Опрос обновлен");
+        } catch (QuestionnaireNotExistException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Произошла ошибка");
+        }
+    }
+
+    @DeleteMapping("/deleteBy")
+    public ResponseEntity<String> deleteQuestionnaireById(@RequestParam Long id) {
+        try {
+            questionnaireService.deleteQuestionnaireById(id);
+            return ResponseEntity.ok("Опрос удален");
+        } catch (QuestionnaireNotExistException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Произошла ошибка");
+        }
     }
 }

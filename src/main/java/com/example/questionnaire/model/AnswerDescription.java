@@ -7,7 +7,9 @@ public class AnswerDescription {
 
     public static AnswerDescription toModel(AnswerDescriptionEntity entity){
         AnswerDescription model = new AnswerDescription();
+
         model.setAnswerDescription(entity.getAnswerDescription());
+
         return model;
     }
 

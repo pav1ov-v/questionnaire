@@ -70,13 +70,4 @@ public class QuestionController {
             return ResponseEntity.badRequest().body("Произошла ошибка");
         }
     }
-
-    @GetMapping()
-    public ResponseEntity<String> getStatus() {
-        try {
-            return ResponseEntity.ok("Сервер работает");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Произошла ошибка");
-        }
-    }
 }

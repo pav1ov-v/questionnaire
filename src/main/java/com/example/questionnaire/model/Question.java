@@ -16,6 +16,7 @@ public class Question {
 
     public static Question toModel(QuestionEntity entity){
         Question model = new Question();
+
         model.setId(entity.getId());
         model.setQuestionContent(entity.getQuestionContent());
         model.setTypeOfAnswer(entity.getTypeOfAnswer());

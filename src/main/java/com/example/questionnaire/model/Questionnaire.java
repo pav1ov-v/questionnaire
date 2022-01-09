@@ -31,6 +31,16 @@ public class Questionnaire {
         return model;
     }
 
+    public static Questionnaire toModelFastView(QuestionnaireEntity entity) {
+        Questionnaire model = new Questionnaire();
+
+        model.setId(entity.getId());
+        model.setTitle(entity.getTitle());
+        model.setDescription(entity.getDescription());
+
+        return model;
+    }
+
     public Questionnaire() {
     }
 
