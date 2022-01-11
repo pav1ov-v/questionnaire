@@ -11,7 +11,7 @@ public class UserEntity {
     private String username;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    private takenQuestionnaireEntity takenQuestionnaire;
+    private TakenQuestionnaireEntity takenQuestionnaire;
 
     @Enumerated(EnumType.STRING)
     private UserRole userRole;

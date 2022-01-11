@@ -16,7 +16,7 @@ public class QuestionnaireEntity {
     private Set<QuestionEntity> questions;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "questionnaire")
-    private takenQuestionnaireEntity takenQuestionnaire;
+    private TakenQuestionnaireEntity takenQuestionnaire;
 
     public QuestionnaireEntity() {
     }

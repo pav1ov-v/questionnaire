@@ -1,8 +1,11 @@
 package com.example.questionnaire.controller;
 
 import com.example.questionnaire.domain.QuestionnaireEntity;
+import com.example.questionnaire.exception.QuestionnaireAlreadyTakenByUserException;
 import com.example.questionnaire.exception.QuestionnaireNotExistException;
+import com.example.questionnaire.exception.UserNotExistException;
 import com.example.questionnaire.service.QuestionnaireService;
+import com.example.questionnaire.service.TakenQuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,9 +31,9 @@ public class QuestionnaireController {
     }
 
     @GetMapping("/getBy")
-    public ResponseEntity<?> getQuestionnaireById(@RequestParam Long id) {
+    public ResponseEntity<?> getQuestionnaireModelById(@RequestParam Long id) {
         try {
-            return ResponseEntity.ok(questionnaireService.getQuestionnaireById(id));
+            return ResponseEntity.ok(questionnaireService.getQuestionnaireModelById(id));
         } catch (QuestionnaireNotExistException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {

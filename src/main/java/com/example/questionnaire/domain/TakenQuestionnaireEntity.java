@@ -1,17 +1,17 @@
 package com.example.questionnaire.domain;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
-public class takenQuestionnaireEntity {
+public class TakenQuestionnaireEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date started;
-    private Date ended;
+    private LocalDateTime started;
+    private LocalDateTime ended;
 
     @OneToOne
     @JoinColumn(name = "user_id")
@@ -21,7 +21,7 @@ public class takenQuestionnaireEntity {
     @JoinColumn(name = "questionnaire_id")
     private QuestionnaireEntity questionnaire;
 
-    public takenQuestionnaireEntity() {
+    public TakenQuestionnaireEntity() {
     }
 
     public Long getId() {
@@ -48,19 +48,19 @@ public class takenQuestionnaireEntity {
         this.questionnaire = questionnaire;
     }
 
-    public Date getStarted() {
+    public LocalDateTime getStarted() {
         return started;
     }
 
-    public void setStarted(Date started) {
+    public void setStarted(LocalDateTime started) {
         this.started = started;
     }
 
-    public Date getEnded() {
+    public LocalDateTime getEnded() {
         return ended;
     }
 
-    public void setEnded(Date ended) {
+    public void setEnded(LocalDateTime ended) {
         this.ended = ended;
     }
 }

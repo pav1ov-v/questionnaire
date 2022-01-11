@@ -25,18 +25,24 @@ public class QuestionnaireService {
         questionnaireRepository.save(questionnaire);
     }
 
-    public Questionnaire getQuestionnaireById(Long id) throws QuestionnaireNotExistException {
+    public QuestionnaireEntity getQuestionnaireById(Long id) throws QuestionnaireNotExistException {
         QuestionnaireEntity questionnaire;
+
         if (questionnaireRepository.findById(id).isPresent()) {
             questionnaire = questionnaireRepository.findById(id).get();
         } else {
             throw new QuestionnaireNotExistException("Опроса с таким id не существует");
         }
-        return Questionnaire.toModel(questionnaire);
+        return questionnaire;
+    }
+
+    public Questionnaire getQuestionnaireModelById(Long id) throws QuestionnaireNotExistException {
+        return Questionnaire.toModel(getQuestionnaireById(id));
     }
 
     public Set<QuestionnaireFastView> getAllQuestionnairesInfo() {
         Set<QuestionnaireEntity> questionnaireEntities = new HashSet<>();
+
         questionnaireRepository.findAll().forEach(questionnaireEntities::add);
 
         Set<QuestionnaireFastView> questionnaires = new HashSet<>();
@@ -54,6 +60,7 @@ public class QuestionnaireService {
 
             oldQuestionnaire.setTitle(newQuestionnaire.getTitle());
             oldQuestionnaire.setDescription(newQuestionnaire.getDescription());
+
             questionnaireRepository.save(oldQuestionnaire);
         } else {
             throw new QuestionnaireNotExistException("Опроса с таким id не существует");
