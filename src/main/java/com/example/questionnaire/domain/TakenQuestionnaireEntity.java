@@ -13,11 +13,11 @@ public class TakenQuestionnaireEntity {
     private LocalDateTime started;
     private LocalDateTime ended;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "questionnaire_id")
     private QuestionnaireEntity questionnaire;
 

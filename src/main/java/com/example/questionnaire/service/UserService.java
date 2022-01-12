@@ -23,6 +23,10 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public boolean UserByIdIsPresent(Long id) {
+        return userRepository.findById(id).isPresent();
+    }
+
     public UserEntity getUserById(Long id) throws UserNotExistException {
         UserEntity user;
 

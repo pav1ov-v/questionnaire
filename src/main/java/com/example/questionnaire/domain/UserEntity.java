@@ -1,6 +1,7 @@
 package com.example.questionnaire.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class UserEntity {
@@ -10,8 +11,8 @@ public class UserEntity {
 
     private String username;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    private TakenQuestionnaireEntity takenQuestionnaire;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<TakenQuestionnaireEntity> takenQuestionnaires;
 
     @Enumerated(EnumType.STRING)
     private UserRole userRole;

@@ -25,6 +25,10 @@ public class QuestionnaireService {
         questionnaireRepository.save(questionnaire);
     }
 
+    public boolean questionnaireByIdIsPresent(Long id) {
+        return questionnaireRepository.findById(id).isPresent();
+    }
+
     public QuestionnaireEntity getQuestionnaireById(Long id) throws QuestionnaireNotExistException {
         QuestionnaireEntity questionnaire;
 

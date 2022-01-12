@@ -15,8 +15,8 @@ public class QuestionnaireEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "questionnaire")
     private Set<QuestionEntity> questions;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "questionnaire")
-    private TakenQuestionnaireEntity takenQuestionnaire;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "questionnaire")
+    private Set<TakenQuestionnaireEntity> takenQuestionnaires;
 
     public QuestionnaireEntity() {
     }
