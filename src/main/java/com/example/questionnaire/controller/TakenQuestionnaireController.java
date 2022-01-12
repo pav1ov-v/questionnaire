@@ -1,9 +1,6 @@
 package com.example.questionnaire.controller;
 
-import com.example.questionnaire.exception.QuestionnaireAlreadyTakenByUserException;
-import com.example.questionnaire.exception.QuestionnaireNotExistException;
-import com.example.questionnaire.exception.UserAndQuestionnaireNotExistException;
-import com.example.questionnaire.exception.UserNotExistException;
+import com.example.questionnaire.exception.*;
 import com.example.questionnaire.service.TakenQuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +29,22 @@ public class TakenQuestionnaireController {
             return ResponseEntity.ok("Прохождение опроса начато");
         } catch (UserNotExistException | QuestionnaireNotExistException |
                 QuestionnaireAlreadyTakenByUserException | UserAndQuestionnaireNotExistException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Произошла ошибка");
+        }
+    }
+
+    @PostMapping("/submitBy")
+    public ResponseEntity<String> submitQuestionnaireByUser(
+            @RequestParam Long userId,
+            @RequestParam Long questionnaireId
+    ) {
+        try {
+            takenQuestionnaireService.submitQuestionnaireByUser(userId, questionnaireId);
+            return ResponseEntity.ok("Прохождение опроса завершено");
+        } catch (QuestionnaireNotExistException | UserAndQuestionnaireNotExistException | QuestionnaireAlreadySubmittedByUserException |
+                UserNotExistException | QuestionnaireNotTakenByUserException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Произошла ошибка");
