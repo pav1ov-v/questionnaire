@@ -54,4 +54,15 @@ public class TakenQuestionnaireController {
             return ResponseEntity.badRequest().body("Произошла ошибка");
         }
     }
+
+    @GetMapping("/getAllBy")
+    public ResponseEntity<?> getQuestionnairesByUserId(@RequestParam Long userId) {
+        try {
+            return ResponseEntity.ok(takenQuestionnaireService.getTakenQuestionnairesByUserId(userId));
+        } catch (UserNotExistException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Произошла ошибка");
+        }
+    }
 }

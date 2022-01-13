@@ -4,6 +4,7 @@ import com.example.questionnaire.dao.TakenQuestionnaireRepository;
 import com.example.questionnaire.domain.TakenQuestionnaireEntity;
 import com.example.questionnaire.exception.*;
 import com.example.questionnaire.model.TakenQuestionnaire;
+import com.example.questionnaire.model.TakenQuestionnairesByUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -87,5 +88,9 @@ public class TakenQuestionnaireService {
         } else if (!questionnaireService.questionnaireByIdIsPresent(questionnaireId)) {
             throw new QuestionnaireNotExistException("Опроса с таким id не существует");
         }
+    }
+
+    public TakenQuestionnairesByUser getTakenQuestionnairesByUserId(Long id) throws UserNotExistException {
+        return TakenQuestionnairesByUser.toModel(userService.getUserById(id));
     }
 }

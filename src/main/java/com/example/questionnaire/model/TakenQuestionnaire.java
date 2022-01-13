@@ -8,7 +8,7 @@ public class TakenQuestionnaire {
     private Long id;
     private LocalDateTime started;
     private LocalDateTime ended;
-    private Questionnaire questionnaire;
+    private QuestionnaireFastView questionnaire;
 
     public static TakenQuestionnaire toModel(TakenQuestionnaireEntity entity) {
         TakenQuestionnaire model = new TakenQuestionnaire();
@@ -16,7 +16,7 @@ public class TakenQuestionnaire {
         model.setId(entity.getId());
         model.setStarted(entity.getStarted());
         model.setEnded(entity.getEnded());
-        model.setQuestionnaire(Questionnaire.toModel(entity.getQuestionnaire()));
+        model.setQuestionnaire(QuestionnaireFastView.toModel(entity.getQuestionnaire()));
 
         return model;
     }
@@ -49,11 +49,11 @@ public class TakenQuestionnaire {
         this.ended = ended;
     }
 
-    public Questionnaire getQuestionnaire() {
+    public QuestionnaireFastView getQuestionnaire() {
         return questionnaire;
     }
 
-    public void setQuestionnaire(Questionnaire questionnaire) {
+    public void setQuestionnaire(QuestionnaireFastView questionnaire) {
         this.questionnaire = questionnaire;
     }
 }
