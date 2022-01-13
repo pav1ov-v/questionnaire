@@ -4,10 +4,7 @@ import com.example.questionnaire.exception.*;
 import com.example.questionnaire.service.TakenQuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/takenQuestionnaire")
@@ -36,15 +33,22 @@ public class TakenQuestionnaireController {
     }
 
     @PostMapping("/submitBy")
-    public ResponseEntity<String> submitQuestionnaireByUser(
-            @RequestParam Long userId,
-            @RequestParam Long questionnaireId
-    ) {
+    public ResponseEntity<String> submitQuestionnaireById(@RequestParam Long id) {
         try {
-            takenQuestionnaireService.submitQuestionnaireByUser(userId, questionnaireId);
+            takenQuestionnaireService.submitQuestionnaireById(id);
             return ResponseEntity.ok("Прохождение опроса завершено");
-        } catch (QuestionnaireNotExistException | UserAndQuestionnaireNotExistException | QuestionnaireAlreadySubmittedByUserException |
-                UserNotExistException | QuestionnaireNotTakenByUserException e) {
+        } catch (QuestionnaireAlreadySubmittedByUserException | TakenQuestionnaireNotExistException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Произошла ошибка");
+        }
+    }
+
+    @GetMapping("/getBy")
+    public ResponseEntity<?> getQuestionnaireModelById(@RequestParam Long id) {
+        try {
+            return ResponseEntity.ok(takenQuestionnaireService.getTakenQuestionnaireModelById(id));
+        } catch (TakenQuestionnaireNotExistException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Произошла ошибка");

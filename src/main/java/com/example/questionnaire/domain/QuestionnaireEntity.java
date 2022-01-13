@@ -52,4 +52,12 @@ public class QuestionnaireEntity {
     public void setQuestions(Set<QuestionEntity> questions) {
         this.questions = questions;
     }
+
+    public Set<TakenQuestionnaireEntity> getTakenQuestionnaires() {
+        return takenQuestionnaires;
+    }
+
+    public void setTakenQuestionnaires(Set<TakenQuestionnaireEntity> takenQuestionnaires) {
+        this.takenQuestionnaires = takenQuestionnaires;
+    }
 }

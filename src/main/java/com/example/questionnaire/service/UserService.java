@@ -23,7 +23,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public boolean UserByIdIsPresent(Long id) {
+    public boolean userByIdIsPresent(Long id) {
         return userRepository.findById(id).isPresent();
     }
 

@@ -14,6 +14,8 @@ public class QuestionnaireFastView {
         model.setTitle(entity.getTitle());
         model.setDescription(entity.getDescription());
 
+
+
         return model;
     }
 
