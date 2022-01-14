@@ -1,5 +1,7 @@
 package com.example.questionnaire.domain;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -18,7 +20,11 @@ public class QuestionEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
     private Set<AnswerDescriptionEntity> answerDescriptions;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "question")
+    private AnswerByUserEntity answerByUser;
+
     @Enumerated(EnumType.STRING)
+    @NotNull
     private TypeOfAnswer typeOfAnswer;
 
     public QuestionEntity() {

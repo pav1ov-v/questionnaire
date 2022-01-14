@@ -36,7 +36,7 @@ public class QuestionController {
     @GetMapping("/getBy")
     public ResponseEntity<?> getQuestionById(@RequestParam Long id) {
         try {
-            return ResponseEntity.ok(questionService.getQuestionById(id));
+            return ResponseEntity.ok(questionService.getQuestionModelById(id));
         } catch (QuestionNotExistException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {

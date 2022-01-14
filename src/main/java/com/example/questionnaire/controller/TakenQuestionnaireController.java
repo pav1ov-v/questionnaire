@@ -45,7 +45,7 @@ public class TakenQuestionnaireController {
     }
 
     @GetMapping("/getBy")
-    public ResponseEntity<?> getQuestionnaireModelById(@RequestParam Long id) {
+    public ResponseEntity<?> getTakenQuestionnaireModelById(@RequestParam Long id) {
         try {
             return ResponseEntity.ok(takenQuestionnaireService.getTakenQuestionnaireModelById(id));
         } catch (TakenQuestionnaireNotExistException e) {
@@ -56,7 +56,7 @@ public class TakenQuestionnaireController {
     }
 
     @GetMapping("/getAllBy")
-    public ResponseEntity<?> getQuestionnairesByUserId(@RequestParam Long userId) {
+    public ResponseEntity<?> getTakenQuestionnairesByUserId(@RequestParam Long userId) {
         try {
             return ResponseEntity.ok(takenQuestionnaireService.getTakenQuestionnairesByUserId(userId));
         } catch (UserNotExistException e) {
